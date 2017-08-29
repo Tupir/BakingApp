@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.petergabor.bakingapp.recipe_descripton.RecipeDescriptionAdapter;
 import com.example.petergabor.bakingapp.utils.Recept;
 
 import java.util.ArrayList;

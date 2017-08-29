@@ -1,4 +1,4 @@
-package com.example.petergabor.bakingapp;
+package com.example.petergabor.bakingapp.recipe_descripton;
 
 /**
  * Created by PepovPC on 7/16/2017.
@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.petergabor.bakingapp.R;
 import com.example.petergabor.bakingapp.utils.Recept;
 
 import java.util.ArrayList;

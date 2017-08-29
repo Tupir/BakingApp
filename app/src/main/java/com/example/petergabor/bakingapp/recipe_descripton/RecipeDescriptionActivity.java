@@ -1,4 +1,4 @@
-package com.example.petergabor.bakingapp;
+package com.example.petergabor.bakingapp.recipe_descripton;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.petergabor.bakingapp.IngredientListActivity;
+import com.example.petergabor.bakingapp.R;
 import com.example.petergabor.bakingapp.utils.Recept;
 
 import java.util.ArrayList;

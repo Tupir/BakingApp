@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ProgressBar;
 
+import com.example.petergabor.bakingapp.recipe_descripton.RecipeDescriptionActivity;
 import com.example.petergabor.bakingapp.utils.Recept;
 
 public class AllRecipesActivity extends AppCompatActivity implements AllRecipeAdapter.ForecastAdapterOnClickHandler {
