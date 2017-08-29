@@ -1,13 +1,10 @@
 package com.example.petergabor.bakingapp.utils;
 
-import android.graphics.Movie;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class ReceptJsonParser {
@@ -35,6 +32,7 @@ public class ReceptJsonParser {
         recepts.clear();
         Recept recept;
 
+
         for(int i = 0; i < receptArray.length(); i++) {
             JSONObject receptObject = receptArray.getJSONObject(i);
             String title = receptObject.getString(OWM_RESULT);
@@ -43,11 +41,13 @@ public class ReceptJsonParser {
             String quantity = null;
             String measure = null;
             String ingredient = null;
+            ArrayList<String> kop = new ArrayList<>();
             for(int j = 0; j < ingredientsArray.length(); j++){
                 JSONObject ingredientObjet = ingredientsArray.getJSONObject(j);
                 quantity = ingredientObjet.getString(OWM_QUANTITY);
                 measure = ingredientObjet.getString(OWM_MEASURE);
                 ingredient = ingredientObjet.getString(OWM_ONE_INGREDIENT);
+                kop.add(j, ingredient);
                 System.out.println(ingredient);
             }
             JSONArray stepsArray = receptObject.getJSONArray(OWM_STEPS);
@@ -70,7 +70,7 @@ public class ReceptJsonParser {
             recept.setTitle(title);
             recept.setQuantity(Integer.parseInt(quantity));
             recept.setMeasure(measure);
-            recept.setIngreadient(ingredient);
+            recept.setIngredient(kop);
             recept.setShortDesc(shortDesc);
             recept.setDescription(descri);
             recept.setVideoUrl(videoUrl);

@@ -122,6 +122,7 @@ public class AllRecipeAdapter extends RecyclerView.Adapter<AllRecipeAdapter.Fore
      * @param data The new weather data to be displayed.
      */
     public void setReceptData(ArrayList<Recept> data) {
+        System.out.println(data.size());
         receptData = data;
         notifyDataSetChanged();
     }
@@ -132,22 +133,18 @@ public class AllRecipeAdapter extends RecyclerView.Adapter<AllRecipeAdapter.Fore
 
         switch (title) {
             case "Nutella Pie": forecastAdapterViewHolder.image.setBackgroundResource(R.drawable.nutella_pie);
-                forecastAdapterViewHolder.image.setScaleType(ImageView.ScaleType.FIT_XY);
                 break;
             case "Brownies": forecastAdapterViewHolder.image.setBackgroundResource(R.drawable.brownies);
-                forecastAdapterViewHolder.image.setScaleType(ImageView.ScaleType.FIT_XY);
                 break;
             case "Yellow Cake": forecastAdapterViewHolder.image.setBackgroundResource(R.drawable.cake);
-                forecastAdapterViewHolder.image.setScaleType(ImageView.ScaleType.FIT_XY);
                 break;
             case "Cheesecake": forecastAdapterViewHolder.image.setBackgroundResource(R.drawable.cheesecake);
-                forecastAdapterViewHolder.image.setScaleType(ImageView.ScaleType.FIT_XY);
                 break;
             default:
+                forecastAdapterViewHolder.image.setBackgroundResource(R.drawable.no_image);
                 break;
         }
-
-
+        forecastAdapterViewHolder.image.setScaleType(ImageView.ScaleType.FIT_XY);
     }
 
 

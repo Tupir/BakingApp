@@ -3,7 +3,7 @@ package com.example.petergabor.bakingapp.utils;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import static android.R.attr.id;
+import java.util.ArrayList;
 
 
 public class Recept implements Parcelable {
@@ -12,7 +12,7 @@ public class Recept implements Parcelable {
     private String title;
     private int quantity;
     private String measure;
-    private String ingredient;
+    private ArrayList<String> ingredient;
     private String shortDesc;
     private String description;
     private String videoUrl;
@@ -22,7 +22,7 @@ public class Recept implements Parcelable {
         super();
     }
 
-    public Recept(int quantity, String title, String measure, String ingredient, String shortDesc, String description, String videoUrl) {
+    public Recept(int quantity, String title, String measure, ArrayList<String> ingredient, String shortDesc, String description, String videoUrl) {
         this.quantity = quantity;
         this.title = title;
         this.measure = measure;
@@ -54,11 +54,11 @@ public class Recept implements Parcelable {
 
     public String getMeasure() {return measure;}
 
-    public void setIngreadient(String ingredient) {
+    public void setIngredient(ArrayList<String> ingredient) {
         this.ingredient = ingredient;
     }
 
-    public String getIngreadient() {
+    public ArrayList<String> getIngreadient() {
         return ingredient;
     }
 
@@ -97,7 +97,7 @@ public class Recept implements Parcelable {
         dest.writeString(title);
         dest.writeInt(quantity);
         dest.writeString(measure);
-        dest.writeString(ingredient);
+        dest.writeList(ingredient);
         dest.writeString(shortDesc);
         dest.writeString(description);
         dest.writeString(videoUrl);
@@ -119,7 +119,7 @@ public class Recept implements Parcelable {
         title = in.readString();
         quantity = in.readInt();
         measure = in.readString();
-        ingredient = in.readString();
+        ingredient = in.readArrayList(null);
         shortDesc = in.readString();
         description = in.readString();
         videoUrl = in.readString();

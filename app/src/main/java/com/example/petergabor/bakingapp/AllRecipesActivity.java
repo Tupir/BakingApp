@@ -34,13 +34,13 @@ public class AllRecipesActivity extends AppCompatActivity implements AllRecipeAd
         recycler.setAdapter(mAdapter);
 
 
-        getSupportLoaderManager().initLoader(FORECAST_LOADER_ID, null, new AllRecipesLoader(this, mAdapter));
+        getSupportLoaderManager().initLoader(FORECAST_LOADER_ID, null, new AllRecipesDataLoader(this, mAdapter));
 
     }
 
     @Override
     public void onClick(Recept recept) {
-        Intent intentToStartDetailActivity = new Intent(this, RecipeDescription.class);
+        Intent intentToStartDetailActivity = new Intent(this, RecipeDescriptionActivity.class);
         intentToStartDetailActivity.putExtra("recept", recept);
         startActivity(intentToStartDetailActivity);
 

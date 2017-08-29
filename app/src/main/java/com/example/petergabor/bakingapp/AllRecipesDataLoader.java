@@ -18,12 +18,12 @@ import static com.example.petergabor.bakingapp.AllRecipesActivity.mLoadingIndica
 
 
 // is ok to do it on Cursor Loader,but try to meanwhile save all other movie items into DB as SERVICE?
-public class AllRecipesLoader implements LoaderManager.LoaderCallbacks<ArrayList<Recept>>{
+public class AllRecipesDataLoader implements LoaderManager.LoaderCallbacks<ArrayList<Recept>>{
 
     public AllRecipeAdapter mAdapter;
     private Context context;
 
-    AllRecipesLoader(Context context, AllRecipeAdapter mAdapter){
+    AllRecipesDataLoader(Context context, AllRecipeAdapter mAdapter){
         this.context = context;
         this.mAdapter = mAdapter;
     }
