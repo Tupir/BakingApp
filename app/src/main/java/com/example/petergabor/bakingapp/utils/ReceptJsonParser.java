@@ -38,28 +38,38 @@ public class ReceptJsonParser {
             String title = receptObject.getString(OWM_RESULT);
             System.out.println(title);
             JSONArray ingredientsArray = receptObject.getJSONArray( OWM_INGREDIENTS);
-            String quantity = null;
+            int quantity;
             String measure = null;
             String ingredient = null;
-            ArrayList<String> kop = new ArrayList<>();
+            ArrayList<Integer> quant = new ArrayList<>();
+            ArrayList<String> mea = new ArrayList<>();
+            ArrayList<String> ingr = new ArrayList<>();
             for(int j = 0; j < ingredientsArray.length(); j++){
                 JSONObject ingredientObjet = ingredientsArray.getJSONObject(j);
-                quantity = ingredientObjet.getString(OWM_QUANTITY);
+                quantity = ingredientObjet.getInt(OWM_QUANTITY);
+                quant.add(j, quantity);
                 measure = ingredientObjet.getString(OWM_MEASURE);
+                mea.add(j, measure);
                 ingredient = ingredientObjet.getString(OWM_ONE_INGREDIENT);
-                kop.add(j, ingredient);
+                ingr.add(j, ingredient);
                 System.out.println(ingredient);
             }
             JSONArray stepsArray = receptObject.getJSONArray(OWM_STEPS);
             String shortDesc = null;
             String descri = null;
             String videoUrl = null;
+            ArrayList<String> shoDes = new ArrayList<>();
+            ArrayList<String> desc = new ArrayList<>();
+            ArrayList<String> videUrl = new ArrayList<>();
             System.out.println(stepsArray.length());
             for(int j = 0; j < stepsArray.length(); j++){
                 JSONObject ingredientObject = stepsArray.getJSONObject(j);
                 shortDesc = ingredientObject.getString(OWM_SHORT_DESCRI);
+                shoDes.add(j, shortDesc);
                 descri = ingredientObject.getString(OWM_DESCRIPTION);
+                desc.add(j, descri);
                 videoUrl = ingredientObject.getString(OWM_VIDEO_URL);
+                videUrl.add(j, videoUrl);
                 if(videoUrl.isEmpty())
                     System.out.println("PRAZDNE");
                 System.out.println(videoUrl);
@@ -68,12 +78,12 @@ public class ReceptJsonParser {
 
             recept = new Recept();
             recept.setTitle(title);
-            recept.setQuantity(Integer.parseInt(quantity));
-            recept.setMeasure(measure);
-            recept.setIngredient(kop);
-            recept.setShortDesc(shortDesc);
-            recept.setDescription(descri);
-            recept.setVideoUrl(videoUrl);
+            recept.setQuantity(quant);
+            recept.setMeasure(mea);
+            recept.setIngredient(ingr);
+            recept.setShortDesc(shoDes);
+            recept.setDescription(desc);
+            recept.setVideoUrl(videUrl);
 
 
             recepts.add(recept);

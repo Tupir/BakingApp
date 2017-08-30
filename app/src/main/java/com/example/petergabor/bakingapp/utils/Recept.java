@@ -10,19 +10,21 @@ public class Recept implements Parcelable {
 
 
     private String title;
-    private int quantity;
-    private String measure;
+    private ArrayList<Integer> quantity;
+    private ArrayList<String>  measure;
     private ArrayList<String> ingredient;
-    private String shortDesc;
-    private String description;
-    private String videoUrl;
+    private ArrayList<String> shortDesc;
+    private ArrayList<String> description;
+    private ArrayList<String> videoUrl;
 
 
     public Recept() {
         super();
     }
 
-    public Recept(int quantity, String title, String measure, ArrayList<String> ingredient, String shortDesc, String description, String videoUrl) {
+    public Recept(ArrayList<Integer> quantity, String title, ArrayList<String>  measure,
+                  ArrayList<String> ingredient, ArrayList<String> shortDesc, ArrayList<String> description,
+                  ArrayList<String> videoUrl) {
         this.quantity = quantity;
         this.title = title;
         this.measure = measure;
@@ -32,11 +34,11 @@ public class Recept implements Parcelable {
         this.videoUrl = videoUrl;
     }
 
-    public int getQuantity() {
+    public ArrayList<Integer> getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(ArrayList<Integer> quantity) {
         this.quantity = quantity;
     }
 
@@ -48,11 +50,11 @@ public class Recept implements Parcelable {
         this.title = title;
     }
 
-    public void setMeasure(String measure) {
+    public void setMeasure(ArrayList<String>  measure) {
         this.measure = measure;
     }
 
-    public String getMeasure() {return measure;}
+    public ArrayList<String>  getMeasure() {return measure;}
 
     public void setIngredient(ArrayList<String> ingredient) {
         this.ingredient = ingredient;
@@ -62,27 +64,27 @@ public class Recept implements Parcelable {
         return ingredient;
     }
 
-    public void setShortDesc(String shortDesc) {
+    public void setShortDesc(ArrayList<String> shortDesc) {
         this.shortDesc = shortDesc;
     }
 
-    public String getShortDesc() {
+    public ArrayList<String> getShortDesc() {
         return shortDesc;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(ArrayList<String> description) {
         this.description = description;
     }
 
-    public String getDescription() {
+    public ArrayList<String> getDescription() {
         return description;
     }
 
-    public void setVideoUrl(String videoUrl) {
+    public void setVideoUrl(ArrayList<String> videoUrl) {
         this.videoUrl = videoUrl;
     }
 
-    public String getVideoUrl() {
+    public ArrayList<String> getVideoUrl() {
         return videoUrl;
     }
 
@@ -95,12 +97,12 @@ public class Recept implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
-        dest.writeInt(quantity);
-        dest.writeString(measure);
+        dest.writeList(quantity);
+        dest.writeList(measure);
         dest.writeList(ingredient);
-        dest.writeString(shortDesc);
-        dest.writeString(description);
-        dest.writeString(videoUrl);
+        dest.writeList(shortDesc);
+        dest.writeList(description);
+        dest.writeList(videoUrl);
     }
 
 
@@ -117,12 +119,12 @@ public class Recept implements Parcelable {
 
     public Recept(Parcel in) {
         title = in.readString();
-        quantity = in.readInt();
-        measure = in.readString();
+        quantity = in.readArrayList(null);
+        measure = in.readArrayList(null);
         ingredient = in.readArrayList(null);
-        shortDesc = in.readString();
-        description = in.readString();
-        videoUrl = in.readString();
+        shortDesc = in.readArrayList(null);
+        description = in.readArrayList(null);
+        videoUrl = in.readArrayList(null);
     }
 
 

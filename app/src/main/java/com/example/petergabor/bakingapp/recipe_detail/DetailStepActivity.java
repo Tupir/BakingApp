@@ -1,27 +1,28 @@
-package com.example.petergabor.bakingapp;
+package com.example.petergabor.bakingapp.recipe_detail;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.petergabor.bakingapp.R;
 import com.example.petergabor.bakingapp.recipe_descripton.RecipeDescriptionAdapter;
 import com.example.petergabor.bakingapp.utils.Recept;
 
 import java.util.ArrayList;
 
-public class IngredientListActivity extends AppCompatActivity {
+public class DetailStepActivity extends AppCompatActivity {
+
     private Recept recept;
     private RecyclerView recycler;
     private RecipeDescriptionAdapter mAdapter;
     ArrayList<String> shortDescriptionArray;
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ingredient_list);
-        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_detail_step);
 
         Intent intentThatStartedThisActivity = getIntent();
         if (intentThatStartedThisActivity != null) {
@@ -30,20 +31,14 @@ public class IngredientListActivity extends AppCompatActivity {
                 setTitle(recept.getTitle());
                 shortDescriptionArray = recept.getIngreadient();
                 System.out.println("pocet: "+shortDescriptionArray.size());
+
+            }
+            if (intentThatStartedThisActivity.hasExtra("position")) {
+                position = intentThatStartedThisActivity.getIntExtra("position", 0);
             }
         }
 
-
-        // nastavenie recyclerview
-        recycler = (RecyclerView) findViewById(R.id.recepts);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recycler.setLayoutManager(layoutManager);
-        recycler.setHasFixedSize(true);
-        //recycler.setItemAnimator(new DefaultItemAnimator());
-
-        // vyplnit recyclerview datami
-        mAdapter = new RecipeDescriptionAdapter(this.getClass().getSimpleName(), null, recept);
-        recycler.setAdapter(mAdapter);
+        System.out.println(position);
 
 
 

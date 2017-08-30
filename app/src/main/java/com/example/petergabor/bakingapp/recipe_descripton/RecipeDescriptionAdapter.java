@@ -34,24 +34,22 @@ public class RecipeDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.
      * Rozhranie, ktore urcuje, co sa vykona po kliknuti na konkretny view
      */
     public interface ForecastAdapterOnClickHandler {
-        void onClick(Recept recept);
+        void onClick(int stepPosition);
     }
 
-    public RecipeDescriptionAdapter(String activity, ForecastAdapterOnClickHandler clickHandler, ArrayList<String> data) {
+    public RecipeDescriptionAdapter(String activity, ForecastAdapterOnClickHandler clickHandler, Recept recept) {
         this.activity = activity;
-        System.out.println(activity.getClass().getSimpleName());
         this.mClickHandler = clickHandler;   // for Clicking
-        this.data = data;
-        System.out.println(activity.getClass().getSimpleName().toString());
-
+        this.recept = recept;
+        data = recept.getShortDesc();
     }
 
 
 
     public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public final TextView text;
-        public final TextView number;
+        private final TextView text;
+        private final TextView number;
 
         public ForecastAdapterViewHolder(View view) {
             super(view);
@@ -62,20 +60,20 @@ public class RecipeDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.
 
         @Override
         public void onClick(View v) {
-            int adapterPosition = getAdapterPosition();
-            //Recept recept = data.get(adapterPosition);    // CIZE POTREBUJEM TU CELY RECEPT
-            mClickHandler.onClick(recept);
+            mClickHandler.onClick(getAdapterPosition());
         }
     }
 
 
     public class ForecastAdapterViewHolder2 extends RecyclerView.ViewHolder{
 
-        public final TextView text;
+        public final TextView ingredient;
+        //private final TextView number;
 
         public ForecastAdapterViewHolder2(View view) {
             super(view);
-            text = view.findViewById(R.id.step_desc);
+            ingredient = view.findViewById(R.id.ingredient);
+            //number = view.findViewById(R.id.number);
         }
     }
 
@@ -90,14 +88,14 @@ public class RecipeDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.
 
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
 
-        if (viewType == VIEW_INGREDIENTS) {
+        if (viewType == VIEW_STEPS) {
             View v = layoutInflater.inflate(R.layout.description_recyclerview_item, viewGroup, false);
 
             return new ForecastAdapterViewHolder(v);
         } else {
-            //View v = layoutInflater.inflate(R.layout.review_item, viewGroup, false);
+            View v = layoutInflater.inflate(R.layout.ingredient_recyclerview_item, viewGroup, false);
 
-            return null;
+            return new ForecastAdapterViewHolder2(v);
         }
 
     }
@@ -106,24 +104,18 @@ public class RecipeDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        //String title = receptData.get(position).getShortDesc();
-        //forecastAdapterViewHolder.text.setText(recept.getShortDesc());
-
-        //forecastAdapterViewHolder.text.setText(Integer.toString(++position)+" - "+data.get(--position));
-
         int viewType = getItemViewType(position);
         switch(viewType){
-            case VIEW_INGREDIENTS:
+            case VIEW_STEPS:
                 ForecastAdapterViewHolder ForecastAdapterViewHolder = (RecipeDescriptionAdapter.ForecastAdapterViewHolder) holder;
-                //trailerViewHolder.trailer.setText(trailers.get(position));
                 ForecastAdapterViewHolder.text.setText(data.get(position));
                 ForecastAdapterViewHolder.number.setText(Integer.toString(++position));
                 break;
-//            case VIEW_REVIEWS:
-//                reviewViewHolder reviewViewHolder = (DetailAdapter.reviewViewHolder) holder;
-//                reviewViewHolder.name.setText(reviews.get(position).get(0)+": ");
-//                reviewViewHolder.text.setText(reviews.get(position).get(1));
-//                break;
+            case VIEW_INGREDIENTS:
+                ForecastAdapterViewHolder2 ForecastAdapterViewHolder2 = (RecipeDescriptionAdapter.ForecastAdapterViewHolder2) holder;
+                ForecastAdapterViewHolder2.ingredient.setText(data.get(position));
+                //ForecastAdapterViewHolder2.number.setText(Integer.toString(++position));
+                break;
             default:
                 System.out.println("Error in onBindViewHolder method");
         }
@@ -145,13 +137,15 @@ public class RecipeDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.
 
     @Override
     public int getItemViewType(int position) {
-        int i = 0;
-        if(("RecipeDescriptionActivity").equalsIgnoreCase("RecipeDescriptionActivity"))
-            i = VIEW_INGREDIENTS;
-        else
-            i = VIEW_INGREDIENTS;
-
-        return i;
+        int view;
+        if((activity).equalsIgnoreCase("RecipeDescriptionFragment")) {
+            view = VIEW_STEPS;
+            data = recept.getShortDesc();
+        }else{
+            view = VIEW_INGREDIENTS;
+            data = recept.getIngreadient();
+        }
+        return view;
     }
 
 

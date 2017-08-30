@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.petergabor.bakingapp.recipe_detail.DetailStepActivity;
 import com.example.petergabor.bakingapp.IngredientListActivity;
 import com.example.petergabor.bakingapp.R;
 import com.example.petergabor.bakingapp.utils.Recept;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 
-public class RecipeDescriptionActivity extends AppCompatActivity implements RecipeDescriptionAdapter.ForecastAdapterOnClickHandler {
+public class RecipeDescriptionActivity extends AppCompatActivity implements RecipeDescriptionFragment.OnImageClickListener {
 
     private Recept recept;
     private RecyclerView recycler;
@@ -38,26 +39,19 @@ public class RecipeDescriptionActivity extends AppCompatActivity implements Reci
             if (intentThatStartedThisActivity.hasExtra("recept")) {
                 recept = intentThatStartedThisActivity.getParcelableExtra("recept");
                 setTitle(recept.getTitle());
-                shortDescriptionArray = recept.getIngreadient();
-                System.out.println("pocet: "+shortDescriptionArray.size());
+                //shortDescriptionArray = recept.getIngreadient();
             }
         }
 
 
         RecipeDescriptionFragment recipeDescriptionFragment = new RecipeDescriptionFragment();
-        recipeDescriptionFragment.setDataPekne(shortDescriptionArray);
+        recipeDescriptionFragment.setReceptData(recept);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .add(R.id.head_container, recipeDescriptionFragment)
                 .commit();
 
-
-    }
-
-
-    @Override
-    public void onClick(Recept recept) {
 
     }
 
@@ -69,4 +63,11 @@ public class RecipeDescriptionActivity extends AppCompatActivity implements Reci
     }
 
 
+    @Override
+    public void onImageSelected(int position) {
+        Intent intentToStartDetailActivity = new Intent(this, DetailStepActivity.class);
+        intentToStartDetailActivity.putExtra("recept", recept);
+        intentToStartDetailActivity.putExtra("position", position);
+        startActivity(intentToStartDetailActivity);
+    }
 }

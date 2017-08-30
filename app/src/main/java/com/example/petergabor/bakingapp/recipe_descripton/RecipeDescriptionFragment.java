@@ -1,5 +1,6 @@
 package com.example.petergabor.bakingapp.recipe_descripton;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.example.petergabor.bakingapp.R;
 import com.example.petergabor.bakingapp.utils.Recept;
@@ -15,18 +18,45 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class RecipeDescriptionFragment extends Fragment {
+public class RecipeDescriptionFragment extends Fragment implements RecipeDescriptionAdapter.ForecastAdapterOnClickHandler{
 
     private Recept recept;
     private RecyclerView recycler;
     private RecipeDescriptionAdapter mAdapter;
-    ArrayList<String> shortDescriptionArray;
-    private RecipeDescriptionActivity recipeDescriptionActivity = new RecipeDescriptionActivity();
+
+    // Define a new interface OnImageClickListener that triggers a callback in the host activity
+    OnImageClickListener mCallback;
 
     public RecipeDescriptionFragment(){
 
     }
 
+    @Override
+    public void onClick(int stepPosition) {
+        System.out.println(stepPosition);
+        mCallback.onImageSelected(stepPosition);
+    }
+
+
+    // OnImageClickListener interface, calls a method in the host activity named onImageSelected
+    public interface OnImageClickListener {
+        void onImageSelected(int position);
+    }
+
+    // Override onAttach to make sure that the container activity has implemented the callback
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // This makes sure that the host activity has implemented the callback interface
+        // If not, it throws an exception
+        try {
+            mCallback = (OnImageClickListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement onItemClicked");
+        }
+    }
 
 
 
@@ -36,10 +66,6 @@ public class RecipeDescriptionFragment extends Fragment {
         // Inflate the Android-Me fragment layout
         View rootView = inflater.inflate(R.layout.fragment_recept_description, container, false);
 
-
-
-        System.out.println(Arrays.toString(shortDescriptionArray.toArray()));
-
         // nastavenie recyclerview
         recycler = rootView.findViewById(R.id.recepts);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -48,17 +74,14 @@ public class RecipeDescriptionFragment extends Fragment {
         //recycler.setItemAnimator(new DefaultItemAnimator());
 
         // vyplnit recyclerview datami
-        mAdapter = new RecipeDescriptionAdapter(this.getClass().getSimpleName(), null, shortDescriptionArray);
+        mAdapter = new RecipeDescriptionAdapter(this.getClass().getSimpleName(), this, recept);
         recycler.setAdapter(mAdapter);
-
-
-
 
         return rootView;
     }
 
-    public void setDataPekne(ArrayList<String> data) {
-        shortDescriptionArray = data;
+    public void setReceptData(Recept recept) {
+        this.recept = recept;
     }
 
 
