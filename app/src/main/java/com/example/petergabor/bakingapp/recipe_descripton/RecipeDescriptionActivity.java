@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.petergabor.bakingapp.recipe_detail.DetailStepActivity;
-import com.example.petergabor.bakingapp.IngredientListActivity;
+import com.example.petergabor.bakingapp.recipe_ingredients.IngredientListActivity;
 import com.example.petergabor.bakingapp.R;
 import com.example.petergabor.bakingapp.utils.Recept;
 
@@ -30,7 +30,7 @@ public class RecipeDescriptionActivity extends AppCompatActivity implements Reci
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recept_description);
+        setContentView(R.layout.full_screen_frame_layout);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this); // before setText
 
@@ -49,7 +49,7 @@ public class RecipeDescriptionActivity extends AppCompatActivity implements Reci
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.head_container, recipeDescriptionFragment)
+                .add(R.id.frame_layout, recipeDescriptionFragment)
                 .commit();
 
 

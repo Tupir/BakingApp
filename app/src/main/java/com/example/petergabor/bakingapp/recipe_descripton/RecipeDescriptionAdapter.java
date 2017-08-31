@@ -68,12 +68,12 @@ public class RecipeDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.
     public class ForecastAdapterViewHolder2 extends RecyclerView.ViewHolder{
 
         public final TextView ingredient;
-        //private final TextView number;
+        private final TextView numberOf;
 
         public ForecastAdapterViewHolder2(View view) {
             super(view);
             ingredient = view.findViewById(R.id.ingredient);
-            //number = view.findViewById(R.id.number);
+            numberOf = view.findViewById(R.id.numberOf);
         }
     }
 
@@ -114,7 +114,15 @@ public class RecipeDescriptionAdapter extends RecyclerView.Adapter<RecyclerView.
             case VIEW_INGREDIENTS:
                 ForecastAdapterViewHolder2 ForecastAdapterViewHolder2 = (RecipeDescriptionAdapter.ForecastAdapterViewHolder2) holder;
                 ForecastAdapterViewHolder2.ingredient.setText(data.get(position));
-                //ForecastAdapterViewHolder2.number.setText(Integer.toString(++position));
+                float quant = recept.getQuantity().get(position);
+                String prefix = "";
+                if(quant > 1){
+                    prefix = "'S";
+                }
+                if(quant == (int)quant)
+                    ForecastAdapterViewHolder2.numberOf.setText((int)quant+" "+recept.getMeasure().get(position)+prefix+" of:");
+                else
+                    ForecastAdapterViewHolder2.numberOf.setText(quant+" "+recept.getMeasure().get(position)+prefix+" of:");
                 break;
             default:
                 System.out.println("Error in onBindViewHolder method");

@@ -21,15 +21,18 @@
         <activity
             android:name=".recipe_descripton.RecipeDescriptionActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".AllRecipesActivity"></activity>
+            android:parentActivityName=".AllRecipesActivity">
+
+        </activity>
         <activity
-            android:name=".IngredientListActivity"
+            android:name=".recipe_ingredients.IngredientListActivity"
             android:parentActivityName=".recipe_descripton.RecipeDescriptionActivity"
             >
 
         </activity>
         <activity
-            android:name=".recipe_detail.DetailStepActivity">
+            android:name=".recipe_detail.DetailStepActivity"
+            android:parentActivityName=".recipe_descripton.RecipeDescriptionActivity">
 
         </activity>
     </application>

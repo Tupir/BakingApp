@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
+                android:textStyle="italic"
                 android:text="@string/ingredients"
                 android:layout_marginLeft="80dp"
                 android:textAppearance="?android:attr/textAppearanceLarge" />

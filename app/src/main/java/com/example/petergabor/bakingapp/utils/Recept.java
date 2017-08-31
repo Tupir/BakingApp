@@ -10,7 +10,7 @@ public class Recept implements Parcelable {
 
 
     private String title;
-    private ArrayList<Integer> quantity;
+    private ArrayList<Float> quantity;
     private ArrayList<String>  measure;
     private ArrayList<String> ingredient;
     private ArrayList<String> shortDesc;
@@ -22,7 +22,7 @@ public class Recept implements Parcelable {
         super();
     }
 
-    public Recept(ArrayList<Integer> quantity, String title, ArrayList<String>  measure,
+    public Recept(ArrayList<Float> quantity, String title, ArrayList<String>  measure,
                   ArrayList<String> ingredient, ArrayList<String> shortDesc, ArrayList<String> description,
                   ArrayList<String> videoUrl) {
         this.quantity = quantity;
@@ -34,11 +34,11 @@ public class Recept implements Parcelable {
         this.videoUrl = videoUrl;
     }
 
-    public ArrayList<Integer> getQuantity() {
+    public ArrayList<Float> getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(ArrayList<Integer> quantity) {
+    public void setQuantity(ArrayList<Float> quantity) {
         this.quantity = quantity;
     }
 

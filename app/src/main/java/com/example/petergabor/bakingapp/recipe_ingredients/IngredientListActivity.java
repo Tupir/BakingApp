@@ -1,11 +1,12 @@
-package com.example.petergabor.bakingapp;
+package com.example.petergabor.bakingapp.recipe_ingredients;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.petergabor.bakingapp.R;
 import com.example.petergabor.bakingapp.recipe_descripton.RecipeDescriptionAdapter;
 import com.example.petergabor.bakingapp.utils.Recept;
 
@@ -20,7 +21,7 @@ public class IngredientListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ingredient_list);
+        setContentView(R.layout.full_screen_frame_layout);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intentThatStartedThisActivity = getIntent();
@@ -34,17 +35,13 @@ public class IngredientListActivity extends AppCompatActivity {
         }
 
 
-        // nastavenie recyclerview
-        recycler = (RecyclerView) findViewById(R.id.recepts);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recycler.setLayoutManager(layoutManager);
-        recycler.setHasFixedSize(true);
-        //recycler.setItemAnimator(new DefaultItemAnimator());
+        IngredientListFragment ingredientListFragment = new IngredientListFragment();
+        ingredientListFragment.setReceptData(recept);
 
-        // vyplnit recyclerview datami
-        mAdapter = new RecipeDescriptionAdapter(this.getClass().getSimpleName(), null, recept);
-        recycler.setAdapter(mAdapter);
-
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(R.id.frame_layout, ingredientListFragment)
+                .commit();
 
 
     }

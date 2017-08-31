@@ -38,15 +38,15 @@ public class ReceptJsonParser {
             String title = receptObject.getString(OWM_RESULT);
             System.out.println(title);
             JSONArray ingredientsArray = receptObject.getJSONArray( OWM_INGREDIENTS);
-            int quantity;
+            float quantity;
             String measure = null;
             String ingredient = null;
-            ArrayList<Integer> quant = new ArrayList<>();
+            ArrayList<Float> quant = new ArrayList<>();
             ArrayList<String> mea = new ArrayList<>();
             ArrayList<String> ingr = new ArrayList<>();
             for(int j = 0; j < ingredientsArray.length(); j++){
                 JSONObject ingredientObjet = ingredientsArray.getJSONObject(j);
-                quantity = ingredientObjet.getInt(OWM_QUANTITY);
+                quantity = Float.parseFloat(ingredientObjet.getString(OWM_QUANTITY));
                 quant.add(j, quantity);
                 measure = ingredientObjet.getString(OWM_MEASURE);
                 mea.add(j, measure);
