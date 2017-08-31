@@ -20,21 +20,23 @@
         </activity>
         <activity
             android:name=".recipe_descripton.RecipeDescriptionActivity"
+            android:configChanges="orientation|screenSize"
             android:launchMode="singleTop"
-            android:parentActivityName=".AllRecipesActivity">
-
-        </activity>
+            android:parentActivityName=".AllRecipesActivity" />
         <activity
             android:name=".recipe_ingredients.IngredientListActivity"
-            android:parentActivityName=".recipe_descripton.RecipeDescriptionActivity"
-            >
-
-        </activity>
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".recipe_descripton.RecipeDescriptionActivity" />
         <activity
             android:name=".recipe_detail.DetailStepActivity"
-            android:parentActivityName=".recipe_descripton.RecipeDescriptionActivity">
-
-        </activity>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:parentActivityName=".recipe_descripton.RecipeDescriptionActivity" />
+        <activity
+            android:name=".recipe_detail.FullScreenVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_full_screen_video"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullscreenTheme" />
     </application>
 
 </manifest>

@@ -7,9 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.petergabor.bakingapp.R;
 import com.example.petergabor.bakingapp.recipe_detail.DetailStepActivity;
 import com.example.petergabor.bakingapp.recipe_ingredients.IngredientListActivity;
-import com.example.petergabor.bakingapp.R;
 import com.example.petergabor.bakingapp.utils.Recept;
 
 import java.util.ArrayList;
