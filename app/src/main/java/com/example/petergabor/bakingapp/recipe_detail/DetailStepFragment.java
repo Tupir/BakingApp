@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.petergabor.bakingapp.R;
 import com.example.petergabor.bakingapp.recipe_descripton.RecipeDescriptionAdapter;
@@ -34,6 +35,9 @@ public class DetailStepFragment extends Fragment {
     private boolean destroyVideo = true;
     String videoUrl;
     private int position;
+    private TextView detailDesc;
+
+
 
 
     @Override
@@ -42,17 +46,8 @@ public class DetailStepFragment extends Fragment {
         // Inflate the Android-Me fragment layout
         View rootView = inflater.inflate(R.layout.fragment_detail_step, container, false);
 
-//        // nastavenie recyclerview
-//        recycler = rootView.findViewById(R.id.recepts);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-//        recycler.setLayoutManager(layoutManager);
-//        recycler.setHasFixedSize(true);
-//        //recycler.setItemAnimator(new DefaultItemAnimator());
-//
-//        // vyplnit recyclerview datami
-//        mAdapter = new RecipeDescriptionAdapter(this.getClass().getSimpleName(), this, recept);
-//        recycler.setAdapter(mAdapter);
-
+        detailDesc = rootView.findViewById(R.id.step_desc);
+        detailDesc.setText(recept.getDescription().get(position));
 
         // Initialize the player view.
         mPlayerView = rootView.findViewById(R.id.playerView);

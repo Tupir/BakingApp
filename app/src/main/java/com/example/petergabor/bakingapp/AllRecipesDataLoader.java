@@ -2,11 +2,13 @@ package com.example.petergabor.bakingapp;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.view.View;
 
+import com.example.petergabor.bakingapp.IdlingResource.SimpleIdlingResource;
 import com.example.petergabor.bakingapp.utils.NetworkUtils;
 import com.example.petergabor.bakingapp.utils.Recept;
 import com.example.petergabor.bakingapp.utils.ReceptJsonParser;
@@ -22,13 +24,20 @@ public class AllRecipesDataLoader implements LoaderManager.LoaderCallbacks<Array
 
     public AllRecipeAdapter mAdapter;
     private Context context;
+    SimpleIdlingResource idlingResource;
+    final DelayerCallback callback;
 
-    AllRecipesDataLoader(Context context, AllRecipeAdapter mAdapter){
+    AllRecipesDataLoader(Context context, AllRecipeAdapter mAdapter, final DelayerCallback callback,
+                         @Nullable final SimpleIdlingResource idlingResource){
         this.context = context;
         this.mAdapter = mAdapter;
+        this.idlingResource = idlingResource;
+        this.callback = callback;
     }
 
-
+    interface DelayerCallback{
+        void onDone(ArrayList<Recept> teas);
+    }
 
     @Override
     public Loader<ArrayList<Recept>> onCreateLoader(int id, Bundle args) {
@@ -43,6 +52,10 @@ public class AllRecipesDataLoader implements LoaderManager.LoaderCallbacks<Array
              */
             @Override
             protected void onStartLoading() {
+                if (idlingResource != null) {
+                    idlingResource.setIdleState(false);
+                }
+
                 if (recepts != null) {
                     deliverResult(recepts);
                 } else {
@@ -97,6 +110,9 @@ public class AllRecipesDataLoader implements LoaderManager.LoaderCallbacks<Array
     public void onLoadFinished(Loader<ArrayList<Recept>> loader, ArrayList<Recept> data) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         mAdapter.setReceptData(data);
+
+        callback.onDone(data);
+        idlingResource.setIdleState(true);
     }
 
     @Override

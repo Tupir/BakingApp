@@ -60,6 +60,7 @@ public class RecipeDescriptionFragment extends Fragment implements RecipeDescrip
 
         // Inflate the Android-Me fragment layout
         View rootView = inflater.inflate(R.layout.fragment_recept_description, container, false);
+        getActivity().setTitle(recept.getTitle());
 
         // nastavenie recyclerview
         recycler = rootView.findViewById(R.id.recepts);

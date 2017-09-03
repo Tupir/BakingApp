@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.example.petergabor.bakingapp.R;
 import com.example.petergabor.bakingapp.recipe_descripton.RecipeDescriptionAdapter;
@@ -57,6 +58,28 @@ public class DetailStepActivity extends AppCompatActivity {
 
     }
 
+
+    public void onNextClick(View view){
+        DetailStepFragment detailStepFragment = new DetailStepFragment();
+        detailStepFragment.setReceptData(recept);
+        detailStepFragment.setPosition(++position);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout, detailStepFragment)
+                .commit();
+    }
+
+
+    public void onPreviousClick(View view){
+        if(position == 0)
+            return;
+        DetailStepFragment detailStepFragment = new DetailStepFragment();
+        detailStepFragment.setReceptData(recept);
+        detailStepFragment.setPosition(--position);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout, detailStepFragment)
+                .commit();
+
+    }
 
 
 }

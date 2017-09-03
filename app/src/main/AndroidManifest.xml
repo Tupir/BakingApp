@@ -21,8 +21,7 @@
         <activity
             android:name=".recipe_descripton.RecipeDescriptionActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop"
-            android:parentActivityName=".AllRecipesActivity" />
+            android:launchMode="singleTop" />
         <activity
             android:name=".recipe_ingredients.IngredientListActivity"
             android:configChanges="orientation|screenSize"

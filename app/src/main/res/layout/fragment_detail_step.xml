@@ -1,25 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#dfa01e"
     tools:context="com.example.petergabor.bakingapp.recipe_detail.DetailStepActivity">
 
 
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
         android:id="@+id/playerView"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="0dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalHalf"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:layout_height="270dp" />
 
 
-</FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#421208" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="190dp">
+
+        <TextView
+            android:id="@+id/step_desc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            tools:text="when you set the bowl of your stand mixer in it, the bowl does not touch the bottom of the pot." />
+
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#421208" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/imageButton1"
+            android:layout_width="80dp"
+            android:onClick="onPreviousClick"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp" />
+
+        <ImageView
+            android:id="@+id/imageButton2"
+            android:layout_width="80dp"
+            android:onClick="onNextClick"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:rotation="180"
+            android:background="@drawable/ic_keyboard_arrow_left_black_24dp"/>
+    </RelativeLayout>
+
+
+</LinearLayout>
