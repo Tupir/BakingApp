@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.petergabor.bakingapp.AllRecipesActivity;
 import com.example.petergabor.bakingapp.R;
+import com.example.petergabor.bakingapp.widget.WidgetService;
 import com.example.petergabor.bakingapp.recipe_detail.DetailStepActivity;
 import com.example.petergabor.bakingapp.recipe_detail.DetailStepFragment;
 import com.example.petergabor.bakingapp.recipe_ingredients.IngredientListActivity;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 
 public class RecipeDescriptionActivity extends AppCompatActivity implements RecipeDescriptionFragment.OnImageClickListener {
 
-    private Recept recept;
+    private static Recept recept;
     private RecyclerView recycler;
     private RecipeDescriptionAdapter mAdapter;
     ArrayList<String> shortDescriptionArray;
@@ -78,7 +79,8 @@ public class RecipeDescriptionActivity extends AppCompatActivity implements Reci
 
 
         }
-
+        // for widget
+        WidgetService.startActionUpdateIngredientWidgets(this);
 
     }
 
@@ -148,6 +150,11 @@ public class RecipeDescriptionActivity extends AppCompatActivity implements Reci
                 }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public static Recept getReceptData() {
+        return recept;
     }
 
 

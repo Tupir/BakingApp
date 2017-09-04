@@ -1,6 +1,9 @@
 package com.example.petergabor.bakingapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.petergabor.bakingapp.IdlingResource.SimpleIdlingResource;
 import com.example.petergabor.bakingapp.recipe_descripton.RecipeDescriptionActivity;
@@ -45,6 +49,13 @@ public class AllRecipesActivity extends AppCompatActivity implements AllRecipeAd
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_recipes);
+
+        if(!isOnline()){
+            Toast.makeText(this, "No connection available!",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);  // loader
 
         // nastavenie recyclerview
@@ -95,4 +106,13 @@ public class AllRecipesActivity extends AppCompatActivity implements AllRecipeAd
         recycler.setAdapter(mAdapter);
 
     }
+
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
 }
