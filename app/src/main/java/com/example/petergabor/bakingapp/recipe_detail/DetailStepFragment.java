@@ -2,7 +2,6 @@ package com.example.petergabor.bakingapp.recipe_detail;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.petergabor.bakingapp.R;
@@ -17,6 +17,7 @@ import com.example.petergabor.bakingapp.recipe_descripton.RecipeDescriptionAdapt
 import com.example.petergabor.bakingapp.utils.Recept;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,7 @@ public class DetailStepFragment extends Fragment {
     String videoUrl;
     private int position;
     private TextView detailDesc;
+    private ImageView imageView;
 
 
 
@@ -45,13 +47,17 @@ public class DetailStepFragment extends Fragment {
 
         // Inflate the Android-Me fragment layout
         View rootView = inflater.inflate(R.layout.fragment_detail_step, container, false);
+        getActivity().setTitle(recept.getShortDesc().get(position));
 
         detailDesc = rootView.findViewById(R.id.step_desc);
         detailDesc.setText(recept.getDescription().get(position));
 
         // Initialize the player view.
-        mPlayerView = rootView.findViewById(R.id.playerView);
-        videoUrl = recept.getVideoUrl().get(position);
+        if(!recept.getVideoUrl().get(position).isEmpty() && recept.getVideoUrl().get(position) != null) {
+            mPlayerView = rootView.findViewById(R.id.playerView);
+            videoUrl = recept.getVideoUrl().get(position);
+        }else
+            imageView = rootView.findViewById(R.id.imageView);
 
         return rootView;
     }
@@ -73,14 +79,27 @@ public class DetailStepFragment extends Fragment {
                     .prepareExoPlayerForUri(getContext(),
                             Uri.parse(videoUrl), mPlayerView);
             ExoPlayerVideoHandler.getInstance().goToForeground();
+        }else{
+            if(recept.getThumbnailUrl().get(position).isEmpty()){
+                imageView.setBackgroundResource(R.drawable.no_video);
+
+            }else {
+                Picasso.with(getContext())
+                        .load(recept.getThumbnailUrl().get(position))
+                        .placeholder(R.drawable.no_video)
+                        .error(R.drawable.no_video)
+                        .into(imageView);
+            }
+
         }
 
-        if(videoUrl == null || videoUrl.isEmpty()){
-            mPlayerView.setDefaultArtwork(BitmapFactory.decodeResource
-                    (getResources(), R.drawable.no_video));
-            mPlayerView.hideController();
-            mPlayerView.setUseController(false);
-        }
+//        // call image instead
+//        if(videoUrl == null || videoUrl.isEmpty()){
+//            mPlayerView.setDefaultArtwork(BitmapFactory.decodeResource
+//                    (getResources(), R.drawable.no_video));
+//            mPlayerView.hideController();
+//            mPlayerView.setUseController(false);
+//        }
 
     }
 

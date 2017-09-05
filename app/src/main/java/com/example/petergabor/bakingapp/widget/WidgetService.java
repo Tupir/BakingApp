@@ -57,6 +57,8 @@ public class WidgetService extends IntentService{
     }
 
     // update background
+    // TODO: create widget not only for current recept, but let user to choose in widget which recept to choose
+    // TODO: maybe create button in ingredients screen, where user can add current ingredients to widget?
     private void handleActionUpdatePlantWidgets() {
         ArrayList<String> ingredients = null;
         if(RecipeDescriptionActivity.getReceptData() != null){

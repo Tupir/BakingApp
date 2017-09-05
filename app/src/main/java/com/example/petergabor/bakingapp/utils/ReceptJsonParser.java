@@ -25,6 +25,7 @@ public class ReceptJsonParser {
         final String OWM_SHORT_DESCRI = "shortDescription";
         final String OWM_DESCRIPTION = "description";
         final String OWM_VIDEO_URL = "videoURL";
+        final String OWM_THUMBNAIL_URL = "thumbnailURL";
 
 
         JSONArray receptArray = new JSONArray(forecastJsonStr);
@@ -58,9 +59,11 @@ public class ReceptJsonParser {
             String shortDesc = null;
             String descri = null;
             String videoUrl = null;
+            String thumbnailUrl = null;
             ArrayList<String> shoDes = new ArrayList<>();
             ArrayList<String> desc = new ArrayList<>();
             ArrayList<String> videUrl = new ArrayList<>();
+            ArrayList<String> thumbnail = new ArrayList<>();
             System.out.println(stepsArray.length());
             for(int j = 0; j < stepsArray.length(); j++){
                 JSONObject ingredientObject = stepsArray.getJSONObject(j);
@@ -70,9 +73,8 @@ public class ReceptJsonParser {
                 desc.add(j, descri);
                 videoUrl = ingredientObject.getString(OWM_VIDEO_URL);
                 videUrl.add(j, videoUrl);
-                if(videoUrl.isEmpty())
-                    System.out.println("PRAZDNE");
-                System.out.println(videoUrl);
+                thumbnailUrl = ingredientObject.getString(OWM_THUMBNAIL_URL);
+                thumbnail.add(j, thumbnailUrl);
             }
 
 
@@ -84,6 +86,7 @@ public class ReceptJsonParser {
             recept.setShortDesc(shoDes);
             recept.setDescription(desc);
             recept.setVideoUrl(videUrl);
+            recept.setThumbnailUrl(thumbnail);
 
 
             recepts.add(recept);

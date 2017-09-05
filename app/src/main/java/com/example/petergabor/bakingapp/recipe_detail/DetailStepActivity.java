@@ -43,7 +43,7 @@ public class DetailStepActivity extends AppCompatActivity {
             }
             if (intentThatStartedThisActivity.hasExtra("position")) {
                 position = intentThatStartedThisActivity.getIntExtra("position", 0);
-                setTitle(recept.getShortDesc().get(position));
+                //setTitle(recept.getShortDesc().get(position));
             }
         }
 
@@ -60,6 +60,8 @@ public class DetailStepActivity extends AppCompatActivity {
 
 
     public void onNextClick(View view){
+        if(position == recept.getShortDesc().size()-1)
+            return;
         DetailStepFragment detailStepFragment = new DetailStepFragment();
         detailStepFragment.setReceptData(recept);
         detailStepFragment.setPosition(++position);

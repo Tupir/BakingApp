@@ -10,10 +10,22 @@
     tools:context="com.example.petergabor.bakingapp.recipe_detail.DetailStepActivity">
 
 
-    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-        android:id="@+id/playerView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="270dp" />
+        android:layout_height="270dp">
+
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:id="@+id/playerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </FrameLayout>
 
 
     <View
@@ -51,28 +63,28 @@
         <ImageView
             android:id="@+id/imageButton1"
             android:layout_width="80dp"
-            android:onClick="onPreviousClick"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="50dp"
             android:layout_marginStart="50dp"
+            android:onClick="onPreviousClick"
             android:scaleType="fitXY"
             android:src="@drawable/ic_keyboard_arrow_left_black_24dp" />
 
         <ImageView
             android:id="@+id/imageButton2"
             android:layout_width="80dp"
-            android:onClick="onNextClick"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginEnd="50dp"
             android:layout_marginRight="50dp"
-            android:rotation="180"
-            android:background="@drawable/ic_keyboard_arrow_left_black_24dp"/>
+            android:background="@drawable/ic_keyboard_arrow_left_black_24dp"
+            android:onClick="onNextClick"
+            android:rotation="180" />
     </RelativeLayout>
 
 

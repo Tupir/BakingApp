@@ -16,6 +16,7 @@ public class Recept implements Parcelable {
     private ArrayList<String> shortDesc;
     private ArrayList<String> description;
     private ArrayList<String> videoUrl;
+    private ArrayList<String> thumbnailUrl;
 
 
     public Recept() {
@@ -24,7 +25,7 @@ public class Recept implements Parcelable {
 
     public Recept(ArrayList<Float> quantity, String title, ArrayList<String>  measure,
                   ArrayList<String> ingredient, ArrayList<String> shortDesc, ArrayList<String> description,
-                  ArrayList<String> videoUrl) {
+                  ArrayList<String> videoUrl, ArrayList<String> thumbnailUrl) {
         this.quantity = quantity;
         this.title = title;
         this.measure = measure;
@@ -32,6 +33,7 @@ public class Recept implements Parcelable {
         this.shortDesc = shortDesc;
         this.description = description;
         this.videoUrl = videoUrl;
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public ArrayList<Float> getQuantity() {
@@ -88,6 +90,14 @@ public class Recept implements Parcelable {
         return videoUrl;
     }
 
+    public void setThumbnailUrl(ArrayList<String> thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public ArrayList<String> getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
 
     @Override
     public int describeContents() {
@@ -103,6 +113,7 @@ public class Recept implements Parcelable {
         dest.writeList(shortDesc);
         dest.writeList(description);
         dest.writeList(videoUrl);
+        dest.writeList(thumbnailUrl);
     }
 
 
@@ -125,6 +136,7 @@ public class Recept implements Parcelable {
         shortDesc = in.readArrayList(null);
         description = in.readArrayList(null);
         videoUrl = in.readArrayList(null);
+        thumbnailUrl = in.readArrayList(null);
     }
 
 
