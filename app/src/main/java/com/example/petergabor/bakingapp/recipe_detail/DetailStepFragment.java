@@ -34,7 +34,7 @@ public class DetailStepFragment extends Fragment {
     private SimpleExoPlayer mExoPlayer;
     private SimpleExoPlayerView mPlayerView;
     private boolean destroyVideo = true;
-    String videoUrl;
+    private String videoUrl;
     private int position;
     private TextView detailDesc;
     private ImageView imageView;
